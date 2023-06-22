@@ -11,10 +11,10 @@ import pandas as pd
 
 def clean_data():
 
-    df = pd.read_csv("solicitudes_credito.csv", sep=";")
+    df = pd.read_csv("solicitudes_credito.csv", sep=";", index_col=0)
 
     # Eliminar filas con valores nulos o vacíos
-    df = df.dropna()
+    df.dropna(inplace=True)
 
     # Convertir columnas relevantes a tipos de datos adecuados
     df['sexo'] = df['sexo'].str.upper()
@@ -29,6 +29,5 @@ def clean_data():
 
     # Eliminar filas duplicadas
     df.drop_duplicates(inplace=True)
-    df = df.dropna()
 
     return df
