@@ -27,4 +27,4 @@ def clean_data():
     df.monto_del_credito = [int(i.replace("$ ", "").replace(".00", "").replace(",", "")) for i in
                             df.monto_del_credito]
     df.drop_duplicates(inplace=True)
-    return df
+    return df
