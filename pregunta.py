@@ -11,8 +11,7 @@ import pandas as pd
 
 def clean_data():
 
-    # Cargar los datos
-    df = pd.read_csv('datos.csv')
+    df = pd.read_csv("solicitudes_credito.csv", sep=";")
 
     # Eliminar filas duplicadas
     df = df.drop_duplicates()
