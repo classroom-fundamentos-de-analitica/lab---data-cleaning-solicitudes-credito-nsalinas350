@@ -13,8 +13,10 @@ def clean_data():
 
     df = pd.read_csv("solicitudes_credito.csv", sep=";")
 
-    #
-    # Inserte su código aquí
-    #
+    # Eliminar filas duplicadas
+    df = df.drop_duplicates()
+
+    # Eliminar filas con datos faltantes
+    df = df.dropna()
 
     return df
