@@ -6,6 +6,7 @@ Realice la limpieza del dataframe. Los tests evaluan si la limpieza fue realizad
 correctamente. Tenga en cuenta datos faltantes y duplicados.
 
 """
+
 from datetime import datetime
 import pandas as pd
 import re
@@ -27,4 +28,4 @@ def clean_data():
     df.monto_del_credito = [int(i.replace("$ ", "").replace(".00", "").replace(",", "")) for i in
                             df.monto_del_credito]
     df.drop_duplicates(inplace=True)
-    return df
+    return df
