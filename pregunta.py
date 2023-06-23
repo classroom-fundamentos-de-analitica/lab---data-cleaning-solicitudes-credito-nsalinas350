@@ -22,7 +22,11 @@ def clean_data():
   df.barrio = df.barrio.str.replace('-', ' ').str.replace('_', ' ').astype(str).str.lower()
   df.estrato = df.estrato.astype(int)
   df.comuna_ciudadano = df.comuna_ciudadano.astype(int)
-  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, format=["%d/%m/%Y", "%Y/%m/%d"], errors="ignore")
+  try:
+    df['fecha_de_beneficio'] = pd.to_datetime(df['fecha_de_beneficio'], dayfirst=True, errors='raise')
+  except ValueError:
+    df['fecha_de_beneficio'] = pd.to_datetime(df['fecha_de_beneficio'], yearfirst=True, errors='coerce')
+
   df.monto_del_credito = df.monto_del_credito.replace('[\$,]', '', regex=True).astype(float)
   df.línea_credito = df.línea_credito.str.replace('-', ' ').str.replace('_', ' ').str.upper()
 
