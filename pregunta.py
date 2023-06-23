@@ -6,9 +6,6 @@ Realice la limpieza del dataframe. Los tests evaluan si la limpieza fue realizad
 correctamente. Tenga en cuenta datos faltantes y duplicados.
 
 """
-from datetime import datetime
-import re
-
 
 import pandas as pd
 
@@ -25,10 +22,7 @@ def clean_data():
   df.barrio = df.barrio.str.replace('-', ' ').str.replace('_', ' ').astype(str).str.lower()
   df.estrato = df.estrato.astype(int)
   df.comuna_ciudadano = df.comuna_ciudadano.astype(int)
-  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True, errors='raise')
-  # df.fecha_de_beneficio = [datetime.strptime(i, "%d/%m/%Y") if bool(re.search(r"\d{1,2}/\d{2}/\d{4}", i))
-  # else datetime.strptime(i, "%Y/%m/%d")
-  # for i in df.fecha_de_beneficio]
+  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, format=["%d/%m/%Y", "%Y/%m/%d"], errors="coerce")
   df.monto_del_credito = df.monto_del_credito.replace('[\$,]', '', regex=True).astype(float)
   df.línea_credito = df.línea_credito.str.replace('-', ' ').str.replace('_', ' ').str.upper()
 
