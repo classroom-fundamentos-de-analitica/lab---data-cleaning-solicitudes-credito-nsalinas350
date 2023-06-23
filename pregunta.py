@@ -25,8 +25,7 @@ def clean_data():
   df.tipo_de_emprendimiento = df.tipo_de_emprendimiento.str.lower()
   df.estrato = df.estrato.astype(int)
   df.comuna_ciudadano = df.comuna_ciudadano.astype(int)
-  df["línea_credito"] = [str.lower(i.strip().replace("-", " ").replace("_", " ").replace(". ", ".")) for i in
-                         df["línea_credito"]]
+  df.línea_credito = df.línea_credito.str.replace('-', ' ').str.replace('_', ' ').str.upper()
   df.monto_del_credito = [int(i.replace("$ ", "").replace(".00", "").replace(",", "")) for i in
                           df.monto_del_credito]
   df.drop_duplicates(inplace=True)
