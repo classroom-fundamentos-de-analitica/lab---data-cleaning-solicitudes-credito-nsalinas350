@@ -25,7 +25,7 @@ def clean_data():
   df.barrio = df.barrio.str.replace('-', ' ').str.replace('_', ' ').astype(str).str.lower()
   df.estrato = df.estrato.astype(int)
   df.comuna_ciudadano = df.comuna_ciudadano.astype(int)
-  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True, errors='ignore')
+  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True, errors='raise')
   # df.fecha_de_beneficio = [datetime.strptime(i, "%d/%m/%Y") if bool(re.search(r"\d{1,2}/\d{2}/\d{4}", i))
   # else datetime.strptime(i, "%Y/%m/%d")
   # for i in df.fecha_de_beneficio]
