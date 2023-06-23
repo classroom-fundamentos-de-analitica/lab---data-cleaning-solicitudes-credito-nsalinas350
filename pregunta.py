@@ -15,10 +15,10 @@ import pandas as pd
 def clean_data():
   df = pd.read_csv("solicitudes_credito.csv", sep=";", index_col=0)
   df.dropna(inplace=True)
-  # df.fecha_de_beneficio = [datetime.strptime(i, "%d/%m/%Y") if bool(re.search(r"\d{1,2}/\d{2}/\d{4}", i))
-  # else datetime.strptime(i, "%Y/%m/%d")
-  # for i in df.fecha_de_beneficio]
-  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True, errors='coerce')
+  df.fecha_de_beneficio = [datetime.strptime(i, "%d/%m/%Y") if bool(re.search(r"\d{1,2}/\d{2}/\d{4}", i))
+  else datetime.strptime(i, "%Y/%m/%d")
+  for i in df.fecha_de_beneficio]
+  # df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True, errors='coerce')
   df.barrio = [str.lower(i).replace("_", " ").replace("-", " ") for i in df.barrio]
   df.sexo = df.sexo.str.lower()
   df.idea_negocio = [str.lower(i.replace("_", " ").replace("-", " ")) for i in df.idea_negocio]
