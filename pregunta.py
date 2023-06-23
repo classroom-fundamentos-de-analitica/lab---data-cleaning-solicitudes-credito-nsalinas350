@@ -8,7 +8,6 @@ correctamente. Tenga en cuenta datos faltantes y duplicados.
 """
 import pandas as pd
 
-import re
 
 def clean_data():
   df = pd.read_csv("solicitudes_credito.csv", sep=";", index_col=0)
@@ -23,8 +22,8 @@ def clean_data():
   df.barrio = df.barrio.str.replace('-', ' ').str.replace('_', ' ').astype(str).str.lower()
   df.estrato = df.estrato.astype(int)
   df.comuna_ciudadano = df.comuna_ciudadano.astype(int)
-  df.fecha_de_beneficio = [pd.to_datetime(i, format="%d/%m/%Y") if bool(re.search(r"\d{1,2}/\d{2}/\d{4}", i))
-  else pd.to_datetime(i, format="%Y/%m/%d") for i in df['fecha_de_beneficio']]
+  df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, format='%d/%m/%Y', errors='coerce').fillna(
+    pd.to_datetime(df.fecha_de_beneficio, format='%Y/%m/%d', errors='coerce'))
   df.monto_del_credito = df.monto_del_credito.replace('[\$,]', '', regex=True).astype(float)
   df.línea_credito = df.línea_credito.str.replace('-', ' ').str.replace('_', ' ').str.upper()
 
